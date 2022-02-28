@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+
+    <h:body>
+
+        <h:form>
+            <p:messages id="messages" showDetail="true" closable="true"/>
+            <p:panel header="Cadastrar Médico em Lotes">
+
+                <h:panelGrid columns="2">
+
+                    <p:outputLabel value="Digite o seu Nome :"/>
+                    <p:inputText id="inputNome" value="#{medicoManagerBean.medico.nome}" placeholder="Ex : João de Sousa"/>
+                    <p:outputLabel value="Digite o CRM :"/>
+                    <p:inputText id="inputCRM" value="#{medicoManagerBean.medico.crm}" placeholder="Ex : 9894f"/>
+                    <p:outputLabel value="Digite o Contato :"/>
+                    <p:inputMask id="inputContato" value="#{medicoManagerBean.medico.contato}" mask="(99)99999-9999"/>
+                    <p:outputLabel value="Sexo " />
+                    <p:selectOneMenu value="#{medicoManagerBean.medico.sexo}" filter="true">
+                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+                        <f:selectItems value="#{medicoManagerBean.itens()}" />
+                    </p:selectOneMenu>
+                </h:panelGrid>
+
+
+
+
+                <p:commandButton value="Adcionar" update="@form" 
+                                 actionListener="#{medicoManagerBean.adicionarMedico()}" />
+
+
+                <p:dataTable var="item" value="#{medicoManagerBean.medicos}" emptyMessage="Nenhum Registro encontrado">
+
+                    <f:facet name="header">
+                        Meus Médicos
+                    </f:facet> 
+
+                    <p:column headerText="Nome">
+                        <p:outputLabel value="#{item.nome}"/>
+                    </p:column>
+
+                    <p:column headerText="CRM">
+                        <p:outputLabel value="#{item.crm}"/>
+                    </p:column>
+
+                    <p:column headerText="Contato">
+                        <p:outputLabel value="#{item.contato}"/>
+                    </p:column>
+                    
+                     <p:column headerText="Sexo">
+                         <p:outputLabel value="#{item.sexo}"/>
+                    </p:column>
+
+
+                </p:dataTable>
+
+
+            </p:panel>
+            <center>
+                <p:button value="voltar" href="index.xhtml"/>
+            </center>
+        </h:form>
+
+    </h:body>
+</html>

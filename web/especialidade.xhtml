@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Especialidade</title>
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <p:growl />
+            <h1>Cadastrar Especialidade</h1>
+            <p:fieldset toggleable="true" legend="Especialidade">
+                <h:panelGrid columns="2">
+                   
+                    <p:outputLabel value="Digite o Nome :" />
+                    <p:inputText value="#{especialidadeManagerBean.especialidade.nome}" required="true" />
+                    <p:outputLabel value="Digite o Desc :" />
+                    <p:inputTextarea value="#{especialidadeManagerBean.especialidade.descricao}" required="true" />
+                </h:panelGrid>
+
+                <center>
+                    
+                    <p:commandButton value="Salvar" 
+                                     actionListener="#{especialidadeManagerBean.salvar()}"
+                                     icon="ui-icon-plus"
+                                     update="@form"/>
+                    
+                    <p:commandButton value="Adicionar" 
+                                     actionListener="#{especialidadeManagerBean.adicionarEspecialidade()}"
+                                     icon="ui-icon-plus"
+                                     update="@form"/>
+                </center>
+
+                <br/>
+                <p:dataTable id="data" var="especialidade" value="#{especialidadeManagerBean.especialidades}" emptyMessage="Nenhum registro encontrado" >
+                    <p:column headerText="Ações">
+                        <p:commandButton icon="ui-icon-trash" 
+                                         actionListener="#{especialidadeManagerBean.removerEspecialidade(especialidade)}"
+                                         update="data" process="@this"/>
+                    </p:column>
+
+                    <p:column headerText="Codigo">
+                        <p:outputLabel value="#{especialidade.id}" />
+                    </p:column>
+                    <p:column headerText="Nome">
+                        <p:outputLabel value="#{especialidade.nome}" />
+                    </p:column>
+                    <p:column headerText="Desc">
+                        <p:outputLabel value="#{especialidade.descricao}" />
+                    </p:column>
+
+                </p:dataTable>
+
+
+
+            </p:fieldset>
+            <br/>
+            <center>
+                <p:button value="Voltar" href="index.xhtml"/>
+            </center>
+        </h:form>
+
+    </h:body>
+</html>
